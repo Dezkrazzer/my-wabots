@@ -39,12 +39,6 @@ const start = async (client = new Client()) => {
             const { from, to, ack } = x
             if (x !== 3) client.sendSeen(to)
         }))*/
-
-        // listening on Incoming Call
-        client.onIncomingCall(( async (call) => {
-            await client.sendText(call.peerJid, 'Maaf, saya tidak bisa menerima panggilan. nelfon = block!')
-            .then(() => client.contactBlock(call.peerJid))
-        }))
     }
 
 create(options(true, start))
