@@ -10,7 +10,7 @@
   "author": "Mhank BarBar",
   "license": "Apache-2.0",
   "dependencies": {
-    "@open-wa/wa-automate": "^3.16.1",
+    "@open-wa/wa-automate": "^4.7.1",
     "@open-wa/wa-decrypt": "^2.0.1",
     "axios": "^0.21.1",
     "brainly-scraper": "^1.0.2",
@@ -31,6 +31,9 @@
   },
   "directories": {
     "lib": "lib"
+  },
+  "engines": {
+    "node": "12.x"
   },
   "devDependencies": {},
   "repository": {
