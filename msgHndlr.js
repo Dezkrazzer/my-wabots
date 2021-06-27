@@ -774,6 +774,9 @@ module.exports = msgHandler = async (client, message) => {
         case '!snk':
             client.reply(from, snk, id)
             break
+        case '!ping':
+            client.reply(from, `Pong!`, id)
+            break   
         }
     } catch (err) {
         console.log(color('[ERROR]', 'red'), err)
