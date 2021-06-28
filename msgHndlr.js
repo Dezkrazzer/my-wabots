@@ -18,6 +18,7 @@ const { help, snk, info, donate, readme, listChannel } = require('./lib/help')
 const { stdout } = require('process')
 const nsfw_ = JSON.parse(fs.readFileSync('./lib/NSFW.json'))
 const welkom = JSON.parse(fs.readFileSync('./lib/welcome.json'))
+const snek = require("snekfetch")
 const { RemoveBgResult, removeBackgroundFromImageBase64, removeBackgroundFromImageFile } = require('remove.bg')
 
 moment.tz.setDefault('Asia/Jakarta').locale('id')
@@ -732,9 +733,11 @@ module.exports = msgHandler = async (client, message) => {
             client.sendFileFromUrl(from, kya, 'Dog.jpeg', 'Inu')
             break
         case '!neko':
-            q2 = Math.floor(Math.random() * 900) + 300;
-            q3 = Math.floor(Math.random() * 900) + 300;
-            client.sendFileFromUrl(from, 'http://placekitten.com/'+q3+'/'+q2, 'neko.png','Neko ')
+            const { meme } = await snek.get("http://api-1cak.herokuapp.com/random")
+            const imgg = meme.url
+            const idns = meme.id
+            const titlee = meme.title
+            client.sendFileFromUrl(from, `http://1cak.com/${idns}`, 'meme.png','Meme hari ini')
             break
         /*case '!sendto':
             client.sendFile(from, './msgHndlr.js', 'msgHndlr.js')
@@ -746,7 +749,7 @@ module.exports = msgHandler = async (client, message) => {
             const url2img = await get.get(`https://mhankbarbar.moe/api/url2image?url=${_query}&tipe=mobile&apiKey=${apiKey}`).json()
             if (url2img.error) return client.reply(from, url2img.error, id)
             client.sendFileFromUrl(from, url2img.result, 'kyaa.jpg', null, id)
-            break
+            break  
         case '!quote':
         case '!quotes':
             const quotes = await get.get('https://mhankbarbar.tech/api/randomquotes').json()
@@ -757,25 +760,17 @@ module.exports = msgHandler = async (client, message) => {
             skya_ = skya.data
             client.reply(from, `➸ *Quotes* : ${skya_.quote}\n➸ *Character* : ${skya_.character}\n➸ *Anime* : ${skya_.anime}`, id)
             break
-        case '!meme':
-            const response = await axios.get('https://meme-api.herokuapp.com/gimme/wholesomeanimemes');
-            const { postlink, title, subreddit, url, nsfw, spoiler } = response.data
-            client.sendFileFromUrl(from, `${url}`, 'meme.jpg', `${title}`)
-            break
         case '!help':
             client.sendText(from, help)
             break
         case '!readme':
             client.reply(from, readme, id)
             break
-        case '!info':
-            client.sendLinkWithAutoPreview(from, 'https://github.com/mhankbarbar/whatsapp-bot', info)
-            break
         case '!snk':
             client.reply(from, snk, id)
             break
         case '!ping':
-            client.reply(from, `Pong!`, id)
+            client.sendText(message.from, `Pong!`)
             break   
         }
     } catch (err) {
