@@ -305,7 +305,7 @@ module.exports = msgHandler = async (client, message) => {
             if (stalk.error) return client.reply(from, stalk.error, id)
             const { bio, follower, following, fullname, username, profile_pic } = stalk
             const caps = `➸ *Nama* : ${fullname}\n➸ *Username* : ${username}\n➸ *Jumlah Followers* : ${follower}\n➸ *Jumlah Following* : ${following}\n➸ *Biodata* : ${bio}`
-            await client.sendFileFromUrl(from, Profile_pic, 'Profile.jpg', caps, id)
+            await client.sendFileFromUrl(from, profile_pic, 'Profile.jpg', caps, id)
             break
         case '!infogempa':
             const bmkg = await get.get(`https://mhankbarbar.moe/api/infogempa?apiKey=${apiKey}`).json()
