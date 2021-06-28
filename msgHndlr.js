@@ -301,10 +301,10 @@ module.exports = msgHandler = async (client, message) => {
             break
         case '!igstalk':
             if (args.length === 1)  return client.reply(from, 'Kirim perintah *!igStalk @username*\nConntoh *!igStalk @duar_amjay*', id)
-            const stalk = await get.get(`https://mhankbarbar.moe/api/igstalk?username=${args[1]}&apiKey=${apiKey}`).json()
+            const stalk = await get.get(`https://api.zeks.xyz/api/igstalk?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&username=${args[1]}`).json()
             if (stalk.error) return client.reply(from, stalk.error, id)
-            const { Biodata, Jumlah_Followers, Jumlah_Following, Jumlah_Post, Name, Username, Profile_pic } = stalk
-            const caps = `➸ *Nama* : ${Name}\n➸ *Username* : ${Username}\n➸ *Jumlah Followers* : ${Jumlah_Followers}\n➸ *Jumlah Following* : ${Jumlah_Following}\n➸ *Jumlah Postingan* : ${Jumlah_Post}\n➸ *Biodata* : ${Biodata}`
+            const { bio, follower, following, fullname, username, profile_pic } = stalk
+            const caps = `➸ *Nama* : ${fullname}\n➸ *Username* : ${username}\n➸ *Jumlah Followers* : ${follower}\n➸ *Jumlah Following* : ${following}\n➸ *Biodata* : ${bio}`
             await client.sendFileFromUrl(from, Profile_pic, 'Profile.jpg', caps, id)
             break
         case '!infogempa':
