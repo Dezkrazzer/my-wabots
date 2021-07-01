@@ -609,8 +609,8 @@ module.exports = msgHandler = async (client, message) => {
             client.reply(from, chord.result, id)
             break
         case '!listdaerah':
-            const listDaerah = await get('https://mhankbarbar.tech/daerah').json()
-            client.reply(from, listDaerah.result, id)
+            const listDaerah = await get('https://api.zeks.xyz/api/jadwalsholat?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&daerah=madiun').json()
+            client.reply(from, listDaerah.listdaerah, id)
             break
         case '!listblock':
             let hih = `This is list of blocked number\nTotal : ${blockNumber.length}\n`
