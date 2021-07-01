@@ -182,14 +182,15 @@ module.exports = msgHandler = async (client, message) => {
             if (!isLinks) return client.reply(from, mess.error.Iv, id)
             try {
                 client.reply(from, mess.wait, id)
-                const resp = await get.get(`https://mhankbarbar.moe/api/yta?url=${args[1]}&apiKey=${apiKey}`).json()
+                const resp = await get.get(`https://api.zeks.xyz/api/ytmp3?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&url=${args[1]}`).json()
+                const respp = await resp.result
                 if (resp.error) {
                     client.reply(from, resp.error, id)
                 } else {
-                    const { title, thumb, filesize, result } = await resp
-                    if (Number(filesize.split(' MB')[0]) >= 30.00) return client.reply(from, 'Maaf durasi video sudah melebihi batas maksimal!', id)
-                    client.sendFileFromUrl(from, thumb, 'thumb.jpg', `➸ *Title* : ${title}\n➸ *Filesize* : ${filesize}\n\nSilahkan tunggu sebentar proses pengiriman file membutuhkan waktu beberapa menit.`, id)
-                    await client.sendFileFromUrl(from, result, `${title}.mp3`, '', id).catch(() => client.reply(from, mess.error.Yt3, id))
+                    const { title, thumbnail, size, url_audio } = await resp
+                    if (Number(size.split(' MB')[0]) >= 30.00) return client.reply(from, 'Maaf durasi video sudah melebihi batas maksimal!', id)
+                    client.sendFileFromUrl(from, thumbnail, 'thumb.jpg', `➸ *Title* : ${title}\n➸ *Filesize* : ${size}\n\nSilahkan tunggu sebentar proses pengiriman file membutuhkan waktu beberapa menit.`, id)
+                    await client.sendFileFromUrl(from, url_audio, `${title}.mp3`, '', id).catch(() => client.reply(from, mess.error.Yt3, id))
                     //await client.sendAudio(from, result, id)
                 }
             } catch (err) {
@@ -600,13 +601,6 @@ module.exports = msgHandler = async (client, message) => {
             const lagu = body.slice(7)
             const lirik = await liriklagu(lagu)
             client.reply(from, lirik, id)
-            break
-        case '!tts':
-            if (args.length === 1) return client.reply(from, 'Kirim perintah *!chord [query]*, contoh *!chord aku bukan boneka*', id)
-            const ttsnya = body.slice(5)
-            const ttts = await get.get(`https://api.zeks.xyz/api/tts?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&code=id&text=${ttsnya}`).json()
-            if (ttts.error) return client.reply(from, ttts.error, id)
-            client.sendFile(from, ttts.result, id)
             break
         case '!listblock':
             let hih = `This is list of blocked number\nTotal : ${blockNumber.length}\n`
