@@ -601,16 +601,12 @@ module.exports = msgHandler = async (client, message) => {
             const lirik = await liriklagu(lagu)
             client.reply(from, lirik, id)
             break
-        case '!chord':
+        case '!tts':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!chord [query]*, contoh *!chord aku bukan boneka*', id)
-            const query__ = body.slice(7)
-            const chord = await get.get(`https://mhankbarbar.moe/api/chord?q=${query__}&apiKey=${apiKey}`).json()
-            if (chord.error) return client.reply(from, chord.error, id)
-            client.reply(from, chord.result, id)
-            break
-        case '!listdaerah':
-            const listDaerah = await get('https://api.zeks.xyz/api/jadwalsholat?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&daerah=madiun').json()
-            client.reply(from, listDaerah.listdaerah, id)
+            const ttsnya = body.slice(5)
+            const ttts = await get.get(`https://api.zeks.xyz/api/tts?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&code=id&text=${ttsnya}`).json()
+            if (ttts.error) return client.reply(from, ttts.error, id)
+            client.sendFile(from, ttts.result, id)
             break
         case '!listblock':
             let hih = `This is list of blocked number\nTotal : ${blockNumber.length}\n`
@@ -620,7 +616,7 @@ module.exports = msgHandler = async (client, message) => {
             client.sendTextWithMentions(from, hih, id)
             break
         case '!jadwalsholat':
-            if (args.length === 1) return client.reply(from, '[❗] Kirim perintah *!jadwalShalat [daerah]*\ncontoh : *!jadwalShalat Tangerang*\nUntuk list daerah kirim perintah *!listDaerah*')
+            if (args.length === 1) return client.reply(from, '[❗] Kirim perintah *!jadwalsholat [daerah]*\ncontoh : *!jadwalsholat Tangerang*')
             const daerah = body.slice(14)
             const jadwalShalat = await get.get(`https://api.zeks.xyz/api/jadwalsholat?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&daerah=${daerah}`).json()
             const typenya = await jadwalShalat.data.object
