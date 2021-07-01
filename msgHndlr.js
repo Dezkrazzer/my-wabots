@@ -629,7 +629,7 @@ module.exports = msgHandler = async (client, message) => {
             tgl = new Date().getDate()
             bln = new Date().getMonth()
             thn = new Date().getFullYear()
-            const resultJadwal = `Jadwal shalat di ${daerah}, ${tgl}-${arrbulan[bln]}-${thn}\n\nSubuh : ${Subuh}\nDzuhur : ${Dzuhur}\nAshar : ${Ashar}\nMaghrib : ${Maghrib}\nIsya : ${Isya}`
+            const resultJadwal = `Jadwal shalat di ${daerah}, ${tgl}-${arrbulan[bln]}-${thn}\n\nSubuh : ${Shubuh}\nDzuhur : ${Dzuhur}\nAshar : ${Ashr}\nMaghrib : ${Maghrib}\nIsya : ${Isya}`
             client.reply(from, resultJadwal, id)
             break
         case '!listchannel':
