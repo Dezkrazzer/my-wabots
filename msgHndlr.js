@@ -623,8 +623,9 @@ module.exports = msgHandler = async (client, message) => {
             if (args.length === 1) return client.reply(from, '[❗] Kirim perintah *!jadwalShalat [daerah]*\ncontoh : *!jadwalShalat Tangerang*\nUntuk list daerah kirim perintah *!listDaerah*')
             const daerah = body.slice(14)
             const jadwalShalat = await get.get(`https://api.zeks.xyz/api/jadwalsholat?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&daerah=${daerah}`).json()
+            const typenya = await jadwalShalat.data.object
             if (jadwalShalat.error) return client.reply(from, jadwalShalat.error, id)
-            const { Shubuh, Dzuhur, Ashr, Maghrib, Isya } = await jadwalShalat
+            const { Shubuh, Dzuhur, Ashr, Maghrib, Isya } = await typenya
             arrbulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
             tgl = new Date().getDate()
             bln = new Date().getMonth()
