@@ -619,17 +619,17 @@ module.exports = msgHandler = async (client, message) => {
             }
             client.sendTextWithMentions(from, hih, id)
             break
-        case '!jadwalshalat':
+        case '!jadwalsholat':
             if (args.length === 1) return client.reply(from, '[❗] Kirim perintah *!jadwalShalat [daerah]*\ncontoh : *!jadwalShalat Tangerang*\nUntuk list daerah kirim perintah *!listDaerah*')
             const daerah = body.slice(14)
-            const jadwalShalat = await get.get(`https://mhankbarbar.moe/api/jshalat?daerah=${daerah}&apiKey=${apiKey}`).json()
+            const jadwalShalat = await get.get(`https://api.zeks.xyz/api/jadwalsholat?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&daerah=${daerah}`).json()
             if (jadwalShalat.error) return client.reply(from, jadwalShalat.error, id)
-            const { Imsyak, Subuh, Dhuha, Dzuhur, Ashar, Maghrib, Isya } = await jadwalShalat
+            const { Shubuh, Dzuhur, Ashr, Maghrib, Isya } = await jadwalShalat
             arrbulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
             tgl = new Date().getDate()
             bln = new Date().getMonth()
             thn = new Date().getFullYear()
-            const resultJadwal = `Jadwal shalat di ${daerah}, ${tgl}-${arrbulan[bln]}-${thn}\n\nImsyak : ${Imsyak}\nSubuh : ${Subuh}\nDhuha : ${Dhuha}\nDzuhur : ${Dzuhur}\nAshar : ${Ashar}\nMaghrib : ${Maghrib}\nIsya : ${Isya}`
+            const resultJadwal = `Jadwal shalat di ${daerah}, ${tgl}-${arrbulan[bln]}-${thn}\n\nSubuh : ${Subuh}\nDzuhur : ${Dzuhur}\nAshar : ${Ashar}\nMaghrib : ${Maghrib}\nIsya : ${Isya}`
             client.reply(from, resultJadwal, id)
             break
         case '!listchannel':
