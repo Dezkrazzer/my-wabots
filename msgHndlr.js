@@ -169,7 +169,7 @@ module.exports = msgHandler = async (client, message) => {
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!nulis [teks]*', id)
             const nulis = encodeURIComponent(body.slice(7))
             client.reply(from, mess.wait, id)
-            let urlnulis = `https://mhankbarbar.moe/api/nulis?font=1&buku=1&text=${nulis}&apiKey=${apiKey}`
+            let urlnulis = `https://api.zeks.xyz/api/nulis?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&text=${nulis}`
             await fetch(urlnulis, {method: "GET"})
             .then(res => res.json())
             .then(async (json) => {
