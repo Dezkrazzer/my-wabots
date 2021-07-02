@@ -769,25 +769,14 @@ module.exports = msgHandler = async (client, message) => {
         case '!ping':
             client.sendText(message.from, `Pong!`)
             break
-        case '!mock':   
-            if (args.length === 1) {
-                return client.reply(from, '[❗] Mohon berikan suatu text\n\n*Contoh* : Kamu seorang yang cerdas', id)
-            } else if (args.length == body.slice(6)) {
-                const data = body.slice(6)
-                let out = ""
-                for (let i = 0; i< data.length; i++) {
-                out += (i + 1) % 2 === 0 ? data[i].toUpperCase() : data[i];
-                }
-                client.sendText(message.from, out)
-            } else if (quotedMsg && quotedMsg.type == 'text') {
-                const data = quotedMsg
-                let out = ""
-                for (let i = 0; i< data.length; i++) {
-                out += (i + 1) % 2 === 0 ? data[i].toUpperCase() : data[i];
-                }
-                client.sendText(message.from, out)
+        case '!mock':
+            if (args.length === 1)  return client.reply(from, '[❗] Mohon berikan suatu text\n\n*Contoh* : Kamu seorang yang cerdas', id)   
+            const data = body.slice(6)
+            let out = ""
+            for (let i = 0; i< data.length; i++) {
+            out += (i + 1) % 2 === 0 ? data[i].toUpperCase() : data[i];
             }
-
+            client.sendText(message.from, out)
             break       
         }
         
