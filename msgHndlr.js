@@ -768,9 +768,13 @@ module.exports = msgHandler = async (client, message) => {
             }
             client.sendText(message.from, out)
             break
-        case '!mengetest':
-            console.log(quotedMsg)
-            break            
+        case '!igdownload':
+                if (args.length === 1)  return client.reply(from, 'Kirim perintah *!igStalk @username*\nConntoh *!igStalk @duar_amjay*', id)
+                const downloadurl = await get.get(`https://api.zeks.xyz/api/ig?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&url=${args[1]}`).json()
+                if (downloadurl.error) return client.reply(from, stalk.error, id)
+                const downloadnyaa = await downloadurl.result.url
+                await client.sendFileFromUrl(from, downloadnyaa, 'Profile.jpg', `Hasil download dari: ${args[1]}`, id)
+            break             
         }
         
     } catch (err) {
