@@ -246,7 +246,7 @@ module.exports = msgHandler = async (client, message) => {
                 var current = result[0].current;
                 var location = result[0].location;
 
-                client.reply(from, `➸ Timezone : UTC${location.timezone}\n➸ Tempat : ${current.observationpoint}\n\n➸ Angin : ${current.winddisplay}\n➸ Awan : ${current.skytext}\n➸ Kelembapan : ${current.humidity}%\n➸ Suhu : ${current.temperature}°`, id)
+                client.reply(from, `➸ *Zona Waktu* : UTC${location.timezone}\n➸ *Lokasi* : ${current.observationpoint}\n➸ *Angin* : ${current.winddisplay}\n➸ *Deskripsi* : ${current.skytext}\n➸ *Kelembapan* : ${current.humidity}%\n➸ *Suhu* : ${current.temperature}°`, id)
             })
             break
         case '!fb':
