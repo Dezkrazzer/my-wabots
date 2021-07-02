@@ -176,10 +176,10 @@ module.exports = msgHandler = async (client, message) => {
                 await client.sendFileFromUrl(from, json.result, 'Nulis.jpg', 'Nih anjim', id)
             }).catch(e => client.reply(from, "Error: "+ e));
             break
-        case '!testnulis':
-            const nulisnya = encodeURIComponent(body.slice(7))
+        case '!nulis2':
+            const nulisnya = encodeURIComponent(body.slice(8))
             client.reply(from, mess.wait, id)
-            let urlnyaa = `https://api.zeks.xyz/api/nulis?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&text=${nulis}`
+            let urlnyaa = `https://api.zeks.xyz/api/nulis?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&text=${nulisnya}`
             client.sendFileFromUrl(from, urlnyaa, 'loli.jpeg', 'Lolinya om', id)
             break        
         case '!ytmp3':
