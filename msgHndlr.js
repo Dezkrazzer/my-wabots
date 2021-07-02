@@ -779,10 +779,11 @@ module.exports = msgHandler = async (client, message) => {
             break
         case '!storydownload':
                 if (args.length === 1)  return client.reply(from, '[❗] Mohon berikan username dan story ke berapa yang akan di download\n\n*Contoh* : !storydownload dezkrazzer_  0\n\n*NOTE*:\nPerlu diingat bahwa story pertama adalah nomor *0*\nStory kedua adalah nomor *1*\nStory ketiga adalah nomor *2*\nDan seterusnya', id)
+                const storyke = args[2]
                 const downloadurl2 = await get.get(`https://api.zeks.xyz/api/igs?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&username=${args[1]}`).json()
                 client.reply(from, mess.wait, id)
                 if (downloadurl2.error) return client.reply(from, stalk.error, id)
-                const downloadnyaa2 = await downloadurl2.data[args[2]].url
+                const downloadnyaa2 = await downloadurl2.data[storyke].url
                 await client.sendFileFromUrl(from, downloadnyaa2, 'story.jpg', `Hasil download dari: ${args[1]}`, id)
             break                 
         }
