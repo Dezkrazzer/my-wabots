@@ -180,7 +180,7 @@ module.exports = msgHandler = async (client, message) => {
             const nulisnya = encodeURIComponent(body.slice(8))
             client.reply(from, mess.wait, id)
             let urlnyaa = `https://api.zeks.xyz/api/nulis?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&text=${nulisnya}`
-            client.sendFileFromUrl(from, urlnyaa, 'loli.jpeg', 'Lolinya om', id)
+            client.sendFileFromUrl(from, urlnyaa, 'nulis.jpeg', 'Ini yaaa', id)
             break        
         case '!ytmp3':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!ytmp3 [linkYt]*, untuk contoh silahkan kirim perintah *!readme*')
@@ -768,8 +768,18 @@ module.exports = msgHandler = async (client, message) => {
             break
         case '!ping':
             client.sendText(message.from, `Pong!`)
-            break   
+            break
+        case '!mock':
+            if (args.length === 1)  return client.reply(from, 'Kirim perintah *!igStalk @username*\nConntoh *!igStalk @duar_amjay*', id)   
+            const data = body.slice(6)
+            let out = ""
+            for (let i = 0; i< data.length; i++) {
+            out += (i + 1) % 2 === 0 ? data[i].toUpperCase() : data[i];
+            }
+            client.sendText(message.from, out)
+            break       
         }
+        
     } catch (err) {
         console.log(color('[ERROR]', 'red'), err)
         //client.kill().then(a => console.log(a))
