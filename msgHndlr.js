@@ -770,7 +770,7 @@ module.exports = msgHandler = async (client, message) => {
             client.sendText(message.from, `Pong!`)
             break
         case '!mock':
-            if (args.length === 1)  return client.reply(from, 'Kirim perintah *!igStalk @username*\nConntoh *!igStalk @duar_amjay*', id)   
+            if (args.length === 1)  return client.reply(from, '[❗] Please provide a text\n\n*Example* : You are gay', id)   
             const data = body.slice(6)
             let out = ""
             for (let i = 0; i< data.length; i++) {
