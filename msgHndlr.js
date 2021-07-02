@@ -176,6 +176,12 @@ module.exports = msgHandler = async (client, message) => {
                 await client.sendFileFromUrl(from, json.result, 'Nulis.jpg', 'Nih anjim', id)
             }).catch(e => client.reply(from, "Error: "+ e));
             break
+        case '!testnulis':
+            const nulisnya = encodeURIComponent(body.slice(7))
+            client.reply(from, mess.wait, id)
+            let urlnyaa = `https://api.zeks.xyz/api/nulis?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&text=${nulis}`
+            client.sendFileFromUrl(from, urlnyaa, 'loli.jpeg', 'Lolinya om', id)
+            break        
         case '!ytmp3':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!ytmp3 [linkYt]*, untuk contoh silahkan kirim perintah *!readme*')
             let isLinks = args[1].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
