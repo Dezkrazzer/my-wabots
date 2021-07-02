@@ -254,22 +254,6 @@ module.exports = msgHandler = async (client, message) => {
         case '!creator':
             client.sendContact(from, '6285892766102@c.us')
             break
-        case '!ig':
-            if (args.length === 1) return client.reply(from, 'Kirim perintah *!ig [linkIg]* untuk contoh silahkan kirim perintah *!readme*')
-            if (!args[1].match(isUrl) && !args[1].includes('instagram.com')) return client.reply(from, mess.error.Iv, id)
-            try {
-                client.reply(from, mess.wait, id)
-                const resp = await get.get(`https://mhankbarbar.moe/api/ig?url=${args[1]}&apiKey=${apiKey}`).json()
-                if (resp.result.includes('.mp4')) {
-                    var ext = '.mp4'
-                } else {
-                    var ext = '.jpg'
-                }
-                await client.sendFileFromUrl(from, resp.result, `igeh${ext}`, '', id)
-            } catch {
-                client.reply(from, mess.error.Ig, id)
-                }
-            break
         case '!nsfw':
             if (!isGroupMsg) return client.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             if (!isGroupAdmins) return client.reply(from, 'Perintah ini hanya bisa di gunakan oleh Admin group!', id)
@@ -306,6 +290,7 @@ module.exports = msgHandler = async (client, message) => {
             if (!isNsfw) return
             client.reply(from, '1. !randomHentai\n2. !randomNsfwNeko', id)
             break
+        case '!ig':    
         case '!igstalk':
             if (args.length === 1)  return client.reply(from, 'Kirim perintah *!igStalk @username*\nConntoh *!igStalk @duar_amjay*', id)
             const stalk = await get.get(`https://api.zeks.xyz/api/igstalk?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&username=${args[1]}`).json()
