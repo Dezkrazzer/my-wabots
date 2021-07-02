@@ -782,7 +782,7 @@ module.exports = msgHandler = async (client, message) => {
                 const downloadurl2 = await get.get(`https://api.zeks.xyz/api/igs?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&username=${args[1]}`).json()
                 client.reply(from, mess.wait, id)
                 if (downloadurl2.error) return client.reply(from, stalk.error, id)
-                const downloadnyaa2 = await downloadurl.data[args[2]].url
+                const downloadnyaa2 = await downloadurl2.data[args[2]].url
                 await client.sendFileFromUrl(from, downloadnyaa2, 'story.jpg', `Hasil download dari: ${args[1]}`, id)
             break                 
         }
