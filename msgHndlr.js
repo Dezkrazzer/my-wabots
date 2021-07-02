@@ -245,9 +245,8 @@ module.exports = msgHandler = async (client, message) => {
                 }
                 var current = result[0].current;
                 var location = result[0].location;
-                const descnya = `Cuaca dari *${current.observationpoint}*\n\n➸ *Zona Waktu* : UTC${location.timezone}\n➸ *Tanggal* : ${current.date}\n➸ *Waktu* : ${current.observationtime}\n\n➸ *Angin* : ${current.winddisplay}\n➸ *Deskripsi* : ${current.skytext}\n➸ *Kelembapan* : ${current.humidity}%\n➸ *Suhu* : ${current.temperature}°`
-                client.sendFileFromUrl(from, current.imageUrl, 'cuaca.jpg', descnya, id)
-                //client.reply(from, `Cuaca dari *${current.observationpoint}*\n\n➸ *Zona Waktu* : UTC${location.timezone}\n➸ *Tanggal* : ${current.date}\n➸ *Waktu* : ${current.observationtime}\n\n➸ *Angin* : ${current.winddisplay}\n➸ *Deskripsi* : ${current.skytext}\n➸ *Kelembapan* : ${current.humidity}%\n➸ *Suhu* : ${current.temperature}°`, id)
+                //const descnya = `Cuaca dari *${current.observationpoint}*\n\n➸ *Zona Waktu* : UTC${location.timezone}\n➸ *Tanggal* : ${current.date}\n\n➸ *Angin* : ${current.winddisplay}\n➸ *Deskripsi* : ${current.skytext}\n➸ *Kelembapan* : ${current.humidity}%\n➸ *Suhu* : ${current.temperature}°`
+                client.reply(from, `Cuaca dari *${current.observationpoint}*\n\n➸ *Zona Waktu* : UTC${location.timezone}\n➸ *Tanggal* : ${current.date}\n\n➸ *Angin* : ${current.winddisplay}\n➸ *Deskripsi* : ${current.skytext}\n➸ *Kelembapan* : ${current.humidity}%\n➸ *Suhu* : ${current.temperature}°`, id)
             })
             break
         case '!fb':
