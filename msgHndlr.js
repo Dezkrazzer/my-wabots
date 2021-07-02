@@ -767,7 +767,10 @@ module.exports = msgHandler = async (client, message) => {
             out += (i + 1) % 2 === 0 ? data[i].toUpperCase() : data[i];
             }
             client.sendText(message.from, out)
-            break       
+            break
+        case '!mengetest':
+            console.log(quotedMsg)
+            break            
         }
         
     } catch (err) {
