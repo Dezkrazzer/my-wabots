@@ -779,7 +779,7 @@ module.exports = msgHandler = async (client, message) => {
                 out += (i + 1) % 2 === 0 ? data[i].toUpperCase() : data[i];
                 }
                 client.sendText(message.from, out)
-            } else if (quotedMsg) {
+            } else if (quotedMsg && quotedMsg.type == 'text') {
                 const data = quotedMsg
                 let out = ""
                 for (let i = 0; i< data.length; i++) {
