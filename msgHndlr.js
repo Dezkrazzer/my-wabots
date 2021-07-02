@@ -19,6 +19,7 @@ const { stdout } = require('process')
 const nsfw_ = JSON.parse(fs.readFileSync('./lib/NSFW.json'))
 const welkom = JSON.parse(fs.readFileSync('./lib/welcome.json'))
 const snek = require("snekfetch")
+const weather = require('weather-js')
 const { RemoveBgResult, removeBackgroundFromImageBase64, removeBackgroundFromImageFile } = require('remove.bg')
 
 moment.tz.setDefault('Asia/Jakarta').locale('id')
@@ -235,13 +236,18 @@ module.exports = msgHandler = async (client, message) => {
             break
         case '!cuaca':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!cuaca [tempat]*\nContoh : *!cuaca tangerang', id)
-            const tempat = body.slice(7)
-            const weather = await get.get(`https://mhankbarbar.moe/api/weather?city=${tempat}&apiKey=${apiKey}`).json()
-            if (weather.error) {
-                client.reply(from, weather.error, id)
-            } else {
-                client.reply(from, `➸ Tempat : ${weather.result.tempat}\n\n➸ Angin : ${weather.result.angin}\n➸ Cuaca : ${weather.result.cuaca}\n➸ Deskripsi : ${weather.result.desk}\n➸ Kelembapan : ${weather.result.kelembapan}\n➸ Suhu : ${weather.result.suhu}\n➸ Udara : ${weather.result.udara}`, id)
-            }
+            
+            weather.find({search: body.slice(7), degreeType: 'C'}, function(err, result) {
+                if (err) message.channel.send(err);
+                if (result === undefined || result.length === 0) {
+                    client.reply(from, 'Please enter a location!\n\nUsage: *!cuaca Ngawi*', id)
+                    return;
+                }
+                var current = result[0].current;
+                var location = result[0].location;
+
+                client.reply(from, `➸ Timezone : UTC${location.timezone}\n➸ Tempat : ${current.observationpoint}\n\n➸ Angin : ${current.winddisplay}\n➸ Awan : ${current.skytext}\n➸ Kelembapan : ${current.humidity}%\n➸ Suhu : ${current.temperature}°`, id)
+            })
             break
         case '!fb':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!fb [linkFb]* untuk contoh silahkan kirim perintah *!readme*', id)
