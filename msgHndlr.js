@@ -733,10 +733,12 @@ module.exports = msgHandler = async (client, message) => {
             if (url2img.error) return client.reply(from, url2img.error, id)
             client.sendFileFromUrl(from, url2img.result, 'kyaa.jpg', null, id)
             break  
-        case '!quote':
-        case '!quotes':
-            const quotes = await get.get('https://mhankbarbar.tech/api/randomquotes').json()
-            client.reply(from, `➸ *Quotes* : ${quotes.quotes}\n➸ *Author* : ${quotes.author}`, id)
+        case '!artinama':
+            if (args.length === 1)  return client.reply(from, '[❗] Mohon berikan suatu nama\n\n*Contoh* : !artinama Rizki', id)   
+            const namanya = body.slice(10)
+            const urlnama = await get.get(`https://api.zeks.xyz/api/artinama?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&nama=${namanya}`).json()
+            const hasilnama = await urlnama.result
+            client.reply(from, `Hasil pencarian nama dari : *${namanya}*\n\n${hasilnama}`, id)
             break
         case '!list':    
         case '!help':
