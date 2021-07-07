@@ -787,7 +787,7 @@ module.exports = msgHandler = async (client, message) => {
             break
         case '!memburik':
                 if (args.length === 1)  return client.reply(from, '[❗] Mohon berikan suatu text\n\n*Contoh* : !memburik EJAKUN', id)
-                const burikurl = await get.get(`https://api.zeks.xyz/api/epep?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&text=${body.slice(10)}`).json()
+                const burikurl = "https://api.zeks.xyz/api/epep?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&text=${body.slice(10)}"
                 client.reply(from, mess.wait, id)
                 await client.sendFileFromUrl(from, burikurl, 'ffburik.jpg', `Burik kek muka lu`, id)
             break                     
