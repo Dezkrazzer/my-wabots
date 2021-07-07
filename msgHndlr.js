@@ -715,12 +715,13 @@ module.exports = msgHandler = async (client, message) => {
             }
             client.sendFileFromUrl(from, nime, `Randomanime${ext}`, 'Randomanime!', id)
             break
-        case '!neko':
-            const { meme } = await snek.get("http://api-1cak.herokuapp.com/random")
-            const imgg = meme.url
-            const idns = meme.id
-            const titlee = meme.title
-            client.sendFileFromUrl(from, `http://1cak.com/${idns}`, 'meme.png','Meme hari ini')
+        case '!shorturl':
+            if (args.length === 1)  return client.reply(from, '[❗] Mohon berikan url yang dibutuhkan', id)
+            const longurlnya = body.slice(10)
+            const apishorturl = await get.get(`https://api.zeks.xyz/api/sid-shortener?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&url=${longurlnya}`).json()
+            const hasilshorturl = await apishorturl.short
+            const datatime = await apishorturl.created_at
+            client.reply(from, `*Hasil shorturl dari website:*\n${longurlnya}\n\n❒ Result: *${hasilshorturl}*\n❒ Date: ${datatime.date}\n❒ Timezone: ${datatime.timezone}`, id)
             break
         /*case '!sendto':
             client.sendFile(from, './msgHndlr.js', 'msgHndlr.js')
