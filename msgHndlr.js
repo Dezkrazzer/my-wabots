@@ -228,10 +228,11 @@ module.exports = msgHandler = async (client, message) => {
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!wiki [query]*\nContoh : *!wiki asu*', id)
             const query_ = body.slice(6)
             const wiki = await get.get(`https://api.zeks.xyz/api/wiki?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&q=${query_}`).json()
+            const hasilwiki = await wiki.result
             if (wiki.error) {
                 client.reply(from, wiki.error, id)
             } else {
-                client.reply(from, `*Hasil pencarian dari *${query_}*\n\n${wiki.result}`, id)
+                client.reply(from, `Hasil pencarian dari *${query_}*\n\n${hasilwiki.result}`, id)
             }
             break
         case '!cuaca':
