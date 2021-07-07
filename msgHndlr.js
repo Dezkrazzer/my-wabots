@@ -223,15 +223,15 @@ module.exports = msgHandler = async (client, message) => {
                 client.sendText(ownerNumber[0], 'Error ytmp4 : '+ er)
                 client.reply(from, mess.error.Yt4, id)
             }
-            break
+            break   
         case '!wiki':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!wiki [query]*\nContoh : *!wiki asu*', id)
             const query_ = body.slice(6)
-            const wiki = await get.get(`https://mhankbarbar.moe/api/wiki?q=${query_}&lang=id&apiKey=${apiKey}`).json()
+            const wiki = await get.get(`https://api.zeks.xyz/api/wiki?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&q=${query_}`).json()
             if (wiki.error) {
                 client.reply(from, wiki.error, id)
             } else {
-                client.reply(from, `➸ *Query* : ${query_}\n\n➸ *Result* : ${wiki.result}`, id)
+                client.reply(from, `*Hasil pencarian dari *${query_}*\n\n${wiki.result}`, id)
             }
             break
         case '!cuaca':
