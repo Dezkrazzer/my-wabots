@@ -784,7 +784,13 @@ module.exports = msgHandler = async (client, message) => {
                 } catch(e) {
                     client.reply(from, `[❗] Terjadi kesalahan sistem, ini mungkin karena:\n\n1) Akun yang anda cari private\n2) Akun yang anda cari tidak mengunggah story\n3) Api yang digunakan sedang error`, id)
                 }
-            break                 
+            break
+        case '!memburik':
+                if (args.length === 1)  return client.reply(from, '[❗] Mohon berikan suatu text\n\n*Contoh* : !memburik EJAKUN', id)
+                const burikurl = await get.get(`https://api.zeks.xyz/api/epep?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&text=${body.slice(10)}`).json()
+                client.reply(from, mess.wait, id)
+                await client.sendFileFromUrl(from, burikurl, 'ffburik.jpg', `Burik kek muka lu`, id)
+            break                     
         }
         
     } catch (err) {
