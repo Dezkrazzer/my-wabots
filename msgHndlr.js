@@ -625,22 +625,15 @@ module.exports = msgHandler = async (client, message) => {
             client.reply(from, listChannel, id)
             break
         case '!jadwaltv':
-            if (args.length === 1) return client.reply(from, 'Kirim perintah *!jadwalTv [channel]*', id)
-            const query = body.slice(10).toLowerCase()
-            const jadwal = await jadwalTv(query)
-            client.reply(from, jadwal, id)
-            break
-        case '!jadwaltvnow':
-            const jadwalNow = await get.get('https://api.haipbis.xyz/jadwaltvnow').json()
-            client.reply(from, `Jam : ${jadwalNow.jam}\n\nJadwalTV : ${jadwalNow.jadwalTV}`, id)
-            break
-        case '!loli':
-            const loli = await get.get(`https://mhankbarbar.tech/api/randomloli?apiKey=${apiKey}`).json()
-            client.sendFileFromUrl(from, loli.result, 'loli.jpeg', 'Lolinya om', id)
-            break
-        case '!waifu':
-            const waifu = await get.get(`https://mhankbarbar.tech/api/waifu?apiKey=${apiKey}`).json()
-            client.sendFileFromUrl(from, waifu.image, 'Waifu.jpg', `➸ Name : ${waifu.name}\n➸ Description : ${waifu.desc}\n\n➸ Source : ${waifu.source}`, id)
+            if (args.length === 1) return client.reply(from, `Kirim perintah !jadwaltv [channelnya]\nSilahkan gunakan *!listchannel* untuk mengetahui channel yg tersedia`, id)
+            try {
+                const channeltvnya = body.slice(10)
+                const urltvnya = await get.get(`https://api.zeks.xyz/api/jadwaltv?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&channel=${channeltvnya}`).json()
+                const hasiltvnya = urltvnya.result
+                client.reply(from, hasiltvnya, id)
+            } catch(e) {
+                client.reply(from, "[❗] Terjadi kesalahan saat pengambilan data, mungkin kamu memasukkan channel tv yang salah", id)
+            }
             break
         case '!husbu':
             const diti = fs.readFileSync('./lib/husbu.json')
