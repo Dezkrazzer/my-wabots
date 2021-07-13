@@ -707,14 +707,10 @@ module.exports = msgHandler = async (client, message) => {
             }
             client.sendFileFromUrl(from, trap, `trapnime${ext}`, 'Trapnime!', id)
             break
-        case '!randomanime':
-            const nime = await randomNimek('anime')
-            if (nime.endsWith('.png')) {
-                var ext = '.png'
-            } else {
-                var ext = '.jpg'
-            }
-            client.sendFileFromUrl(from, nime, `Randomanime${ext}`, 'Randomanime!', id)
+        case '!darkjokes':
+            const urldarkjokes = await get.get("https://api.zeks.xyz/api/darkjokes?apikey=W59BFCtwydp2TPJJv0D0UIICzwS").json()
+            const hasildarkjokes = await urldarkjokes.result
+            client.sendFileFromUrl(from, hasildarkjokes, 'darkjokes.jpg', null, id)
             break
         case '!shorturl':
             if (args.length === 1)  return client.reply(from, '[❗] Mohon berikan url yang dibutuhkan', id)
