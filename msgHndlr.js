@@ -649,63 +649,15 @@ module.exports = msgHandler = async (client, message) => {
             const rindKiy = ditiJsin[rindIndix]
             client.sendFileFromUrl(from, rindKiy.image, 'Husbu.jpg', rindKiy.teks, id)
             break
-        case '!randomhentai':
-            if (isGroupMsg) {
-                if (!isNsfw) return client.reply(from, 'Command/Perintah NSFW belum di aktifkan di group ini!', id)
-                const hentai = await randomNimek('hentai')
-                if (hentai.endsWith('.png')) {
-                    var ext = '.png'
-                } else {
-                    var ext = '.jpg'
-                }
-                client.sendFileFromUrl(from, hentai, `Hentai${ext}`, 'Hentai!', id)
-                break
-            } else {
-                const hentai = await randomNimek('hentai')
-                if (hentai.endsWith('.png')) {
-                    var ext = '.png'
-                } else {
-                    var ext = '.jpg'
-                }
-                client.sendFileFromUrl(from, hentai, `Hentai${ext}`, 'Hentai!', id)
-            }
-        case '!randomnsfwneko':
-            if (isGroupMsg) {
-                if (!isNsfw) return client.reply(from, 'Command/Perintah NSFW belum di aktifkan di group ini!', id)
-                const nsfwneko = await randomNimek('nsfw')
-                if (nsfwneko.endsWith('.png')) {
-                    var ext = '.png'
-                } else {
-                    var ext = '.jpg'
-                }
-                client.sendFileFromUrl(from, nsfwneko, `nsfwNeko${ext}`, 'Nsfwneko!', id)
-            } else {
-                const nsfwneko = await randomNimek('nsfw')
-                if (nsfwneko.endsWith('.png')) {
-                    var ext = '.png'
-                } else {
-                    var ext = '.jpg'
-                }
-                client.sendFileFromUrl(from, nsfwneko, `nsfwNeko${ext}`, 'Nsfwneko!', id)
-            }
+        case '!quote':
+            const urlquote = await get.get("https://api.zeks.xyz/api/quote?apikey=W59BFCtwydp2TPJJv0D0UIICzwS").json()
+            const hasilquote = await urlquote.quotes
+            const authorquote = await urlquote.author
+            client.reply(from, `${hasilquote}\n-${authorquote}`, id)
             break
-        case '!randomnekonime':
-            const nekonime = await get.get('https://mhankbarbars.herokuapp.com/api/nekonime').json()
-            if (nekonime.result.endsWith('.png')) {
-                var ext = '.png'
-            } else {
-                var ext = '.jpg'
-            }
-            client.sendFileFromUrl(from, nekonime.result, `Nekonime${ext}`, 'Nekonime!', id)
-            break
-        case '!randomtrapnime':
-            const trap = await randomNimek('trap')
-            if (trap.endsWith('.png')) {
-                var ext = '.png'
-            } else {
-                var ext = '.jpg'
-            }
-            client.sendFileFromUrl(from, trap, `trapnime${ext}`, 'Trapnime!', id)
+        case '!estetic':
+            const urlestetic = "https://api.zeks.xyz/api/estetikpic?apikey=W59BFCtwydp2TPJJv0D0UIICzwS"
+            client.sendFileFromUrl(from, urlestetic, 'estetic.jpg', "✨", id)
             break
         case '!darkjokes':
             const urldarkjokes = await get.get("https://api.zeks.xyz/api/darkjokes?apikey=W59BFCtwydp2TPJJv0D0UIICzwS").json()
