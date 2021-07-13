@@ -649,6 +649,11 @@ module.exports = msgHandler = async (client, message) => {
             const rindKiy = ditiJsin[rindIndix]
             client.sendFileFromUrl(from, rindKiy.image, 'Husbu.jpg', rindKiy.teks, id)
             break
+        case '!pantun':
+            const pantunurlnya = await get.get("https://api.zeks.xyz/api/pantun?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&=").json()
+            const hasilnyapantun = await pantunurlnya.result
+            client.reply(from, hasilnyapantun.pantun, id)
+            break    
         case '!quote':
             const urlquote = await get.get("https://api.zeks.xyz/api/quote?apikey=W59BFCtwydp2TPJJv0D0UIICzwS").json()
             const hasilquote = await urlquote.result
