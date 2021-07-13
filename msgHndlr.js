@@ -651,9 +651,8 @@ module.exports = msgHandler = async (client, message) => {
             break
         case '!quote':
             const urlquote = await get.get("https://api.zeks.xyz/api/quote?apikey=W59BFCtwydp2TPJJv0D0UIICzwS").json()
-            const hasilquote = await urlquote.quotes
-            const authorquote = await urlquote.author
-            client.reply(from, `${hasilquote}\n-${authorquote}`, id)
+            const hasilquote = await urlquote.result
+            client.reply(from, `${hasilquote.quotes}\n-${hasilquote.author}`, id)
             break
         case '!estetic':
             const urlestetic = "https://api.zeks.xyz/api/estetikpic?apikey=W59BFCtwydp2TPJJv0D0UIICzwS"
