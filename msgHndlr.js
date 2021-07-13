@@ -728,12 +728,11 @@ module.exports = msgHandler = async (client, message) => {
             client.sendFile(from, './msgHndlr.js', 'msgHndlr.js')
             break*/
         case '!url2img':
-            const _query = body.slice(9)
-            if (!_query.match(isUrl)) return client.reply(from, mess.error.Iv, id)
-            if (args.length === 1) return client.reply(from, 'Kirim perintah *!url2img [web]*\nContoh *!url2img https://google.com*', id)
-            const url2img = await get.get(`https://mhankbarbar.moe/api/url2image?url=${_query}&tipe=mobile&apiKey=${apiKey}`).json()
+            const webygdicari = body.slice(9)
+            if (!webygdicari.match(isUrl)) return client.reply(from, mess.error.Iv, id)
+            if (args.length === 1) return client.reply(from, 'Kirim perintah *!url2img [web]*\nContoh *!url2img https://media.discordapp.net/attachments/459002735896035349/864377208607604746/b2a2d3cf-a2d1-46f4-97a9-b2a76b8821bd.png*', id)
             if (url2img.error) return client.reply(from, url2img.error, id)
-            client.sendFileFromUrl(from, url2img.result, 'kyaa.jpg', null, id)
+            client.sendFileFromUrl(from, webygdicari, 'kyaa.jpg', null, id)
             break  
         case '!artinama':
             if (args.length === 1)  return client.reply(from, '[❗] Mohon berikan suatu nama\n\n*Contoh* : !artinama Rizki', id)   
