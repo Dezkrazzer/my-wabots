@@ -730,7 +730,10 @@ module.exports = msgHandler = async (client, message) => {
                 const burikurl = `https://api.zeks.xyz/api/epep?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&text=${body.slice(10)}`
                 client.reply(from, mess.wait, id)
                 await client.sendFileFromUrl(from, burikurl, 'ffburik.jpg', `Burik kek muka lu`, id)
-            break                     
+            break
+  	case '!tag shelen':
+            client.sendText(message.from, `SHELENN ASUUUU`)
+            break		
         }
         
     } catch (err) {
