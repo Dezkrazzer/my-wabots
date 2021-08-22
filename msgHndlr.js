@@ -731,8 +731,8 @@ module.exports = msgHandler = async (client, message) => {
                 client.reply(from, mess.wait, id)
                 await client.sendFileFromUrl(from, burikurl, 'ffburik.jpg', `Burik kek muka lu`, id)
             break
-  	case '!tag shelen':
-            client.sendText(message.from, `SHELENN ASUUUU`)
+  	case '!tag':
+            if (args[0] === 'shellen')  return client.reply(from, 'SHELENNN ASUUUUUUU', id)
             break		
         }
         
