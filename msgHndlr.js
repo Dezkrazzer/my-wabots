@@ -749,4 +749,5 @@ module.exports = msgHandler = async (client, message) => {
         console.log(color('[ERROR]', 'red'), err)
         //client.kill().then(a => console.log(a))
     }
+    }
 }
