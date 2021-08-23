@@ -738,11 +738,15 @@ module.exports = msgHandler = async (client, message) => {
                 const kelaspenulis = encodeURIComponent(argg[2])
                 const textnya = encodeURIComponent(argg[3])
                 let urlnulis2 = `https://api.zeks.me/api/magernulis?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&nama=${namapenulis}&kelas=${kelaspenulis}&text=${textnya}&tinta=1`
-                await fetch(urlnulis2, {method: "GET"})
+		console.log(namapenulis)
+		console.log(kelaspenulis)
+		console.log(textnya)
+		await client.sendFileFromUrl(from, urlnulis2, 'post.jpg', `malesan huu`, id)
+                /*await fetch(urlnulis2, {method: "GET"})
                 .then(res => res.json())
                 .then(async (json) => {
                     await client.sendFileFromUrl(from, urlnulis2, 'Nulis.jpg', 'tolol', id)
-                }).catch(e => client.reply(from, "Error: "+ e));
+                }).catch(e => client.reply(from, "Error: "+ e));*/
             break
 	}
         
