@@ -741,7 +741,7 @@ module.exports = msgHandler = async (client, message) => {
                 await fetch(urlnulis2, {method: "GET"})
                 .then(res => res.json())
                 .then(async (json) => {
-                    await client.sendFileFromUrl(from, json.result, 'Nulis.jpg', 'tolol', id)
+                    await client.sendFileFromUrl(from, urlnulis2, 'Nulis.jpg', 'tolol', id)
                 }).catch(e => client.reply(from, "Error: "+ e));
             break
 	}
