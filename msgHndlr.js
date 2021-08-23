@@ -734,9 +734,9 @@ module.exports = msgHandler = async (client, message) => {
         case '!malesnulis':
                 if (args.length === 1) return client.reply(from, 'Kirim perintah *!magernulis [nama panggilan] [kelas] [text]*', id)
 		const argg = body.trim().split('|')	
-                const namapenulis = encodeURIComponent(arg[1])
-                const kelaspenulis = encodeURIComponent(arg[2])
-                const textnya = encodeURIComponent(arg[3])
+                const namapenulis = encodeURIComponent(argg[1])
+                const kelaspenulis = encodeURIComponent(argg[2])
+                const textnya = encodeURIComponent(argg[3])
                 client.reply(from, mess.wait, id)
                 let urlnulis2 = `https://api.zeks.me/api/magernulis?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&nama=${namapenulis}&kelas=${kelaspenulis}&text=${textnya}&tinta=1`
                 await fetch(urlnulis2, {method: "GET"})
