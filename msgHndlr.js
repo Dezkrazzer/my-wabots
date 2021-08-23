@@ -743,11 +743,12 @@ module.exports = msgHandler = async (client, message) => {
                 .then(async (json) => {
                     await client.sendFileFromUrl(from, json.result, 'Nulis.jpg', 'tolol', id)
                 }).catch(e => client.reply(from, "Error: "+ e));
-            break	
+            break
+	}
         
     } catch (err) {
         console.log(color('[ERROR]', 'red'), err)
         //client.kill().then(a => console.log(a))
     }
-    }
+    
 }
