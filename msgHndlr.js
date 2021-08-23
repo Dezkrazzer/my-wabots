@@ -731,10 +731,19 @@ module.exports = msgHandler = async (client, message) => {
                 client.reply(from, mess.wait, id)
                 await client.sendFileFromUrl(from, burikurl, 'ffburik.jpg', `Burik kek muka lu`, id)
             break
-  	case '!tag':
-            if (args[0] === 'shellen')  return client.reply(from, 'SHELENNN ASUUUUUUU', id)
-            break		
-        }
+        case '!malesnulis':
+                if (args.length === 1) return client.reply(from, 'Kirim perintah *!magernulis [nama panggilan] [kelas] [text]*', id)
+                const nulisk = args.slice(2).join(" ")
+                const namaa = args[1]
+                const kelass = args[2]
+                client.reply(from, mess.wait, id)
+                let urlnulis = `https://api.zeks.me/api/magernulis?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&nama=${namaa}&kelas=${kelass}&text=${nulisk}&tinta=1`
+                await fetch(urlnulis, {method: "GET"})
+                .then(res => res.json())
+                .then(async (json) => {
+                    await client.sendFileFromUrl(from, json.result, 'Nulis.jpg', 'tolol', id)
+                }).catch(e => client.reply(from, "Error: "+ e));
+            break	
         
     } catch (err) {
         console.log(color('[ERROR]', 'red'), err)
