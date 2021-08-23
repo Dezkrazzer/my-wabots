@@ -738,7 +738,7 @@ module.exports = msgHandler = async (client, message) => {
                 const kelass = args[2]
                 client.reply(from, mess.wait, id)
                 let urlnulis2 = `https://api.zeks.me/api/magernulis?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&nama=${namaa}&kelas=${kelass}&text=${nulisk}&tinta=1`
-                await fetch(urlnulis, {method: "GET"})
+                await fetch(urlnulis2, {method: "GET"})
                 .then(res => res.json())
                 .then(async (json) => {
                     await client.sendFileFromUrl(from, json.result, 'Nulis.jpg', 'tolol', id)
