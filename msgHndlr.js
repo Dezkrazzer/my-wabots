@@ -733,7 +733,7 @@ module.exports = msgHandler = async (client, message) => {
             break
         case '!malesnulis':
                 if (args.length === 1) return client.reply(from, 'Kirim perintah *!magernulis [nama panggilan] [kelas] [text]*', id)
-		const argg = body.trim().split('|')	
+		const argg = body.trim().split(" ").slice(1).join(" ").trim().split("|")	
                 const namapenulis = encodeURIComponent(argg[0])
                 const kelaspenulis = encodeURIComponent(argg[1])
                 const textnya = encodeURIComponent(argg[2])
