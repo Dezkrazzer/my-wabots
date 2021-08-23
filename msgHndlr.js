@@ -732,11 +732,12 @@ module.exports = msgHandler = async (client, message) => {
                 await client.sendFileFromUrl(from, burikurl, 'ffburik.jpg', `Burik kek muka lu`, id)
             break
         case '!malesnulis':
-                if (args.length === 1) return client.reply(from, 'Kirim perintah *!magernulis [nama panggilan] [kelas] [text]*', id)
+                if (args.length === 1) return client.reply(from, 'Kirim perintah *!malesnulis Nama Kamu|kelas|text kamu*', id)			
 		const argg = body.trim().split(" ").slice(1).join(" ").trim().split("|")	
                 const namapenulis = encodeURIComponent(argg[0])
                 const kelaspenulis = encodeURIComponent(argg[1])
                 const textnya = encodeURIComponent(argg[2])
+		client.reply(from, mess.wait, id)
                 let urlnulis2 = `https://api.zeks.me/api/magernulis?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&nama=${namapenulis}&kelas=${kelaspenulis}&text=${textnya}&tinta=1`
 		console.log(namapenulis)
 		console.log(kelaspenulis)
