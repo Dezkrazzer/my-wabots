@@ -194,7 +194,7 @@ module.exports = msgHandler = async (client, message) => {
                 if (resp.error) {
                     client.reply(from, resp.error, id)
                 } else {
-                    const { title, thumbnail, size, url_audio } = await resp
+                    const { title, thumbnail, size, url_audio } = await respp
                     console.log(size)
                     if (Number(size.split(' MB')[0]) >= 30.00) return client.reply(from, 'Maaf durasi video sudah melebihi batas maksimal!', id)
                     client.sendFileFromUrl(from, thumbnail, 'thumb.jpg', `➸ *Title* : ${title}\n➸ *Filesize* : ${size}\n\nSilahkan tunggu sebentar proses pengiriman file membutuhkan waktu beberapa menit.`, id)
