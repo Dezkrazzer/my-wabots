@@ -300,22 +300,6 @@ module.exports = msgHandler = async (client, message) => {
                 client.reply(from, 'Usage :\n!brainly [pertanyaan] [.jumlah]\n\nEx : \n!brainly NKRI .2', id)
             }
             break
-        case '!quotemaker':
-            arg = body.trim().split('|')
-            if (arg.length >= 4) {
-                client.reply(from, mess.wait, id)
-                const quotes = encodeURIComponent(arg[1])
-                const author = encodeURIComponent(arg[2])
-                const theme = encodeURIComponent(arg[3])
-                await quotemaker(quotes, author, theme).then(amsu => {
-                    client.sendFile(from, amsu, 'quotesmaker.jpg','neh...').catch(() => {
-                       client.reply(from, mess.error.Qm, id)
-                    })
-                })
-            } else {
-                client.reply(from, 'Usage: \n!quotemaker |teks|watermark|theme\n\nEx :\n!quotemaker |ini contoh|bicit|random', id)
-            }
-            break
         case '!linkgroup':
             if (!isBotGroupAdmins) return client.reply(from, 'Perintah ini hanya bisa di gunakan ketika bot menjadi admin', id)
             if (isGroupMsg) {
