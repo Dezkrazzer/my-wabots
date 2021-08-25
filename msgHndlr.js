@@ -166,7 +166,7 @@ module.exports = msgHandler = async (client, message) => {
                 client.reply(from, 'Masukkan data bahasa : [id] untuk indonesia, [en] untuk inggris, [jp] untuk jepang, dan [ar] untuk arab', id)
             }
             break
-        case '!nulis':
+        /*case '!nulis':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!nulis [teks]*', id)
             const nulis = encodeURIComponent(body.slice(7))
             client.reply(from, mess.wait, id)
@@ -176,8 +176,8 @@ module.exports = msgHandler = async (client, message) => {
             .then(async (json) => {
                 await client.sendFileFromUrl(from, json.result, 'Nulis.jpg', 'Nih anjim', id)
             }).catch(e => client.reply(from, "Error: "+ e));
-            break
-        case '!nulis2':
+            break*/
+        case '!nulis':
             const nulisnya = encodeURIComponent(body.slice(8))
             client.reply(from, mess.wait, id)
             let urlnyaa = `https://api.zeks.xyz/api/nulis?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&text=${nulisnya}`
