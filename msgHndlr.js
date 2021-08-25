@@ -253,9 +253,9 @@ module.exports = msgHandler = async (client, message) => {
             client.sendContact(from, '6282337130026@c.us')
             break
         case '!welcome':
-            if (!isGroupMsg) return client.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
-            if (!isGroupAdmins) return client.reply(from, 'Perintah ini hanya bisa di gunakan oleh Admin group!', id)
-            if (args.length === 1) return client.reply(from, 'Pilih enable atau disable!', id)
+            if (!isGroupMsg) return client.reply(from, '[❗] Perintah ini hanya bisa di gunakan dalam group!', id)
+            if (!isGroupAdmins) return client.reply(from, '[❗] Perintah ini hanya bisa di gunakan oleh Admin group!', id)
+            if (args.length === 1) return client.reply(from, '[❗] Pilih enable atau disable!\n\n*Contoh:*\n!welcome enable', id)
             if (args[1].toLowerCase() === 'enable') {
                 welkom.push(chat.id)
                 fs.writeFileSync('./lib/welcome.json', JSON.stringify(welkom))
