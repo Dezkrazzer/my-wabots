@@ -600,7 +600,7 @@ module.exports = msgHandler = async (client, message) => {
                 const downloadvt = await vtdownload.result.video
                 await client.sendFileFromUrl(from, downloadvt, 'vttiktok.mp4', `Hasil download dari: ${args[1]}`, id)
                 } catch(e) {
-                    client.reply(from, `[❗] Perintah ini masih dalam tahap BETA. Beberapa bug mungkin masih terjadi.\n\nError logs:\n${vtdownload.result}`, id)
+                    client.reply(from, `[❗] Perintah ini masih dalam tahap BETA. Beberapa bug mungkin masih terjadi.\n\nError logs:\n${e.stack}`, id)
                 }
             break
 	}
