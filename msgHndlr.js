@@ -250,7 +250,7 @@ module.exports = msgHandler = async (client, message) => {
             client.sendFileFromUrl(from, epbe.result, 'epbe.mp4', epbe.title, id)
             break
         case '!creator':
-            client.sendContact(from, '6282337130026')
+            client.sendContact(from, '6282337130026@c.us')
             break
         case '!welcome':
             if (!isGroupMsg) return client.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
