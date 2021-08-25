@@ -190,7 +190,7 @@ module.exports = msgHandler = async (client, message) => {
             try {
                 client.reply(from, mess.wait, id)
                 const url = `https://api.zeks.me/api/ytmp3/2?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&url=${args[1]}`;
-                console.log(url);
+                console.log(typeof url)
                 const { result } = await require("axios").get(url).then(x => x.data);
                 if (Number(result.size.split(' MB')[0]) >= 100.00) return client.reply(from, 'Maaf durasi video sudah melebihi batas maksimal!', id);
                 client.sendFileFromUrl(from, result.thumbnail, 'thumb.jpg', `➸ *Title* : ${result.title}\n➸ *Filesize* : ${result.size}\n\nSilahkan tunggu sebentar proses pengiriman file membutuhkan waktu beberapa menit.`, id);
