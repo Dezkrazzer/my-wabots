@@ -205,14 +205,11 @@ module.exports = msgHandler = async (client, message) => {
             if (!isLin) return client.reply(from, mess.error.Iv, id)
             try {
                 client.reply(from, mess.wait, id)
-                const ytv = await get.get(`https://mhankbarbar.moe/api/ytv?url=${args[1]}&apiKey=${apiKey}`).json()
-                if (ytv.error) {
-                    client.reply(from, ytv.error, id)
-                } else {
-                    if (Number(ytv.filesize.split(' MB')[0]) > 40.00) return client.reply(from, 'Maaf durasi video sudah melebihi batas maksimal!', id)
-                    client.sendFileFromUrl(from, ytv.thumb, 'thumb.jpg', `➸ *Title* : ${ytv.title}\n➸ *Filesize* : ${ytv.filesize}\n\nSilahkan tunggu sebentar proses pengiriman file membutuhkan waktu beberapa menit.`, id)
-                    await client.sendFileFromUrl(from, ytv.result, `${ytv.title}.mp4`, '', id).catch(() => client.reply(from, mess.error.Yt4, id))
-                }
+                const ytv = await get.get(`https://api.zeks.me/api/ytmp4/2?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&url=${args[1]}`).json()
+                console.log(ytv.result)              
+                if (Number(ytv.result.size.split(' MB')[0]) > 40.00) return client.reply(from, 'Maaf durasi video sudah melebihi batas maksimal!', id)
+                client.sendFileFromUrl(from, ytv.result.thumb, 'thumb.jpg', `➸ *Title* : ${ytv.result.title}\n➸ *Filesize* : ${ytv.result.size}\n\nSilahkan tunggu sebentar proses pengiriman file membutuhkan waktu beberapa menit.`, id)
+                await client.sendFileFromUrl(from, ytv.result.link, `${ytv.result.title}.mp4`, '', id).catch(() => client.reply(from, mess.error.Yt4, id))
             } catch (er) {
                 client.sendText(ownerNumber[0], 'Error ytmp4 : '+ er)
                 client.reply(from, mess.error.Yt4, id)
