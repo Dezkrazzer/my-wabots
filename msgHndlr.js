@@ -312,13 +312,6 @@ module.exports = msgHandler = async (client, message) => {
             const hasil = `*${waktu}*\n📍 *Lokasi* : *${lokasi}*\n〽️ *Kedalaman* : *${kedalaman}*\n💢 *Magnitude* : *${magnitude}*\n🔘 *Potensi* : *${potensi}*\n📍 *Koordinat* : *${koordinat}*`
             client.sendFileFromUrl(from, map, 'shakemap.jpg', hasil, id)
             break
-        case '!anime':
-            if (args.length === 1) return client.reply(from, 'Kirim perintah *!anime [query]*\nContoh : *!anime darling in the franxx*', id)
-            const animek = await get.get(`https://mhankbarbar.moe/api/kuso?q=${body.slice(7)}&apiKey=${apiKey}`).json()
-            if (animek.error) return client.reply(from, animek.error, id)
-            const res_animek = `Title: *${animek.title}*\n\n${animek.info}\n\nSinopsis: ${animek.sinopsis}\n\nLink Download:\n${animek.link_dl}`
-            client.sendFileFromUrl(from, animek.thumb, 'kusonime.jpg', res_animek, id)
-            break
         case '!nh':
             //if (isGroupMsg) return client.reply(from, 'Sorry this command for private chat only!', id)
             if (args.length === 2) {
@@ -589,6 +582,7 @@ module.exports = msgHandler = async (client, message) => {
             client.deleteMessage(quotedMsgObj.chatId, quotedMsgObj.id, false)
             break
         case '!getses':
+            if (!isOwner) return client.reply(from, 'Perintah ini hanya untuk Owner bot!', id)
             const sesPic = await client.getSnapshot()
             client.sendFile(from, sesPic, 'session.png', 'Neh...', id)
             break
@@ -632,13 +626,6 @@ module.exports = msgHandler = async (client, message) => {
             } catch(e) {
                 client.reply(from, "[❗] Terjadi kesalahan saat pengambilan data, mungkin kamu memasukkan channel tv yang salah", id)
             }
-            break
-        case '!husbu':
-            const diti = fs.readFileSync('./lib/husbu.json')
-            const ditiJsin = JSON.parse(diti)
-            const rindIndix = Math.floor(Math.random() * ditiJsin.length)
-            const rindKiy = ditiJsin[rindIndix]
-            client.sendFileFromUrl(from, rindKiy.image, 'Husbu.jpg', rindKiy.teks, id)
             break
         case '!pantun':
             const pantunurlnya = await get.get("https://api.zeks.xyz/api/pantun?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&=").json()
