@@ -580,21 +580,28 @@ module.exports = msgHandler = async (client, message) => {
             break
         case '!malesnulis':
                 if (args.length === 1) return client.reply(from, 'Kirim perintah *!malesnulis Nama Kamu|kelas|text kamu*', id)			
-		const argg = body.trim().split(" ").slice(1).join(" ").trim().split("|")	
+		        const argg = body.trim().split(" ").slice(1).join(" ").trim().split("|")	
                 const namapenulis = encodeURIComponent(argg[0])
                 const kelaspenulis = encodeURIComponent(argg[1])
                 const textnya = encodeURIComponent(argg[2])
-		client.reply(from, mess.wait, id)
+		        client.reply(from, mess.wait, id)
                 let urlnulis2 = `https://api.zeks.me/api/magernulis?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&nama=${namapenulis}&kelas=${kelaspenulis}&text=${textnya}&tinta=1`
-		console.log(namapenulis)
-		console.log(kelaspenulis)
-		console.log(textnya)
-		await client.sendFileFromUrl(from, urlnulis2, 'post.jpg', `malesan huu`, id)
-                /*await fetch(urlnulis2, {method: "GET"})
-                .then(res => res.json())
-                .then(async (json) => {
-                    await client.sendFileFromUrl(from, urlnulis2, 'Nulis.jpg', 'tolol', id)
-                }).catch(e => client.reply(from, "Error: "+ e));*/
+		        console.log(namapenulis)
+		        console.log(kelaspenulis)
+		        console.log(textnya)
+		        await client.sendFileFromUrl(from, urlnulis2, 'post.jpg', `malesan huu`, id)
+            break
+            case '!vtdownload':
+                if (args.length === 1)  return client.reply(from, '[❗] Mohon berikan link vt tiktok yang valid', id)
+                try {
+                const vtdownload = await get.get(`https://api.vhtear.com/tiktok_no_wm?link=${args[1]}&apikey=c22e9e11d9a248fc8844a42b6c9c8ba2`).json()
+                client.reply(from, mess.wait, id)
+                if (vtdownload.error) return client.reply(from, stalk.error, id)
+                const downloadvt = await vtdownload.result.video
+                await client.sendFileFromUrl(from, downloadvt, 'vttiktok.mp4', `Hasil download dari: ${args[1]}`, id)
+                } catch(e) {
+                    client.reply(from, `[❗] Terjadi kesalahan sistem, ini mungkin karena:\n\n1) Akun yang anda cari private\n2) Akun yang anda cari tidak mengunggah story\n3) Api yang digunakan sedang error`, id)
+                }
             break
 	}
         
