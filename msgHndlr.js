@@ -184,28 +184,21 @@ module.exports = msgHandler = async (client, message) => {
             client.sendFileFromUrl(from, urlnyaa, 'nulis.jpeg', 'Ini yaaa', id)
             break        
         case '!ytmp3':
-            if (args.length === 1) return client.reply(from, 'Kirim perintah *!ytmp3 [linkYt]*, untuk contoh silahkan kirim perintah *!readme*')
-            let isLinks = args[1].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-            if (!isLinks) return client.reply(from, mess.error.Iv, id)
-            try {
-                client.reply(from, mess.wait, id)
-                const { resp } = await require("axios").get(`https://api.zeks.me/api/ytmp3/2?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&url=${args[1]}`).then(x => x.data);
-                if (resp.error) {
-                    client.reply(from, resp.error, id)
-                } else {
-                    const { title, thumbnail, size, url_audio } = await resp
-                    console.log(size)
-                    console.log(args)
-                    if (Number(size.split(' MB')[0]) >= 100.00) return client.reply(from, 'Maaf durasi video sudah melebihi batas maksimal!', id)
-                    client.sendFileFromUrl(from, thumbnail, 'thumb.jpg', `➸ *Title* : ${title}\n➸ *Filesize* : ${size}\n\nSilahkan tunggu sebentar proses pengiriman file membutuhkan waktu beberapa menit.`, id)
-                    await client.sendFileFromUrl(from, url_audio, `${title}.mp3`, '', id).catch(() => client.reply(from, mess.error.Yt3, id))
-                    //await client.sendAudio(from, result, id)
+                if (args.length === 1) return client.reply(from, 'Kirim perintah *!ytmp3 [linkYt]*, untuk contoh silahkan kirim perintah *!readme*')
+                let isLinks = args[1].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
+                if (!isLinks) return client.reply(from, mess.error.Iv, id)
+                try {
+                    client.reply(from, mess.wait, id)
+                    const { result } = await require("axios").get(`https://api.zeks.me/api/ytmp3/2?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&url=${args[1]}).then(x => x.data`);
+                    const { title, thumbnail, size, url_audio } = result; 
+                    if (Number(size.split(' MB')[0]) >= 100.00) return client.reply(from, 'Maaf durasi video sudah melebihi batas maksimal!', id);
+                    client.sendFileFromUrl(from, thumbnail, 'thumb.jpg', `➸ *Title* : ${title}\n➸ *Filesize* : ${size}\n\nSilahkan tunggu sebentar proses pengiriman file membutuhkan waktu beberapa menit.`, id);
+                    await client.sendFileFromUrl(from, url_audio, `${title}.mp3`, '', id).catch(() => client.reply(from, mess.error.Yt3, id));
+                } catch (err) {
+                    console.log(err);
+                    client.reply(from, mess.error.Yt3, id);
                 }
-            } catch (err) {
-                console.log(err)
-                client.reply(from, mess.error.Yt3, id)
-            }
-            break
+                break;
         case '!ytmp4':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!ytmp4 [linkYt]*, untuk contoh silahkan kirim perintah *!readme*')
             let isLin = args[1].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
