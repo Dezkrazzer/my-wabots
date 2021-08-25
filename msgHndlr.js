@@ -561,11 +561,8 @@ module.exports = msgHandler = async (client, message) => {
             //return client.reply(from, 'Jika ingin meng-invite bot ke group anda, silahkan izin ke wa.me/6285892766102', id)
             if (args.length < 2) return client.reply(from, 'Kirim perintah *!join linkgroup key*\n\nEx:\n!join https://chat.whatsapp.com/blablablablablabla abcde\nuntuk key kamu bisa mendapatkannya hanya dengan donasi 5k', id)
             const link = args[1]
-            const key = args[2]
             const tGr = await client.getAllGroups()
-            const minMem = 30
             const isLink = link.match(/(https:\/\/chat.whatsapp.com)/gi)
-            if (key !== 'lGjYt4zA5SQlTDx9z9Ca') return client.reply(from, '*key* salah! silahkan chat owner bot unruk mendapatkan key yang valid', id)
             const check = await client.inviteInfo(link)
             if (!isLink) return client.reply(from, 'Ini link? 👊🤬', id)
             if (check.status === 200) {
@@ -585,12 +582,6 @@ module.exports = msgHandler = async (client, message) => {
             if (!isOwner) return client.reply(from, 'Perintah ini hanya untuk Owner bot!', id)
             const sesPic = await client.getSnapshot()
             client.sendFile(from, sesPic, 'session.png', 'Neh...', id)
-            break
-        case '!lirik':
-            if (args.length == 1) return client.reply(from, 'Kirim perintah *!lirik [optional]*, contoh *!lirik aku bukan boneka*', id)
-            const lagu = body.slice(7)
-            const lirik = await liriklagu(lagu)
-            client.reply(from, lirik, id)
             break
         case '!listblock':
             let hih = `This is list of blocked number\nTotal : ${blockNumber.length}\n`
