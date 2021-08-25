@@ -259,23 +259,7 @@ module.exports = msgHandler = async (client, message) => {
             client.sendFileFromUrl(from, epbe.result, 'epbe.mp4', epbe.title, id)
             break
         case '!creator':
-            client.sendContact(from, '6285892766102@c.us')
-            break
-        case '!nsfw':
-            if (!isGroupMsg) return client.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
-            if (!isGroupAdmins) return client.reply(from, 'Perintah ini hanya bisa di gunakan oleh Admin group!', id)
-            if (args.length === 1) return client.reply(from, 'Pilih enable atau disable!', id)
-            if (args[1].toLowerCase() === 'enable') {
-                nsfw_.push(chat.id)
-                fs.writeFileSync('./lib/NSFW.json', JSON.stringify(nsfw_))
-                client.reply(from, 'NSWF Command berhasil di aktifkan di group ini! kirim perintah *!nsfwMenu* untuk mengetahui menu', id)
-            } else if (args[1].toLowerCase() === 'disable') {
-                nsfw_.splice(chat.id, 1)
-                fs.writeFileSync('./lib/NSFW.json', JSON.stringify(nsfw_))
-                client.reply(from, 'NSFW Command berhasil di nonaktifkan di group ini!', id)
-            } else {
-                client.reply(from, 'Pilih enable atau disable udin!', id)
-            }
+            client.sendContact(from, '6282337130026')
             break
         case '!welcome':
             if (!isGroupMsg) return client.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
@@ -293,10 +277,6 @@ module.exports = msgHandler = async (client, message) => {
                 client.reply(from, 'Pilih enable atau disable udin!', id)
             }
             break
-        case '!nsfwmenu':
-            if (!isNsfw) return
-            client.reply(from, '1. !randomHentai\n2. !randomNsfwNeko', id)
-            break
         case '!ig':    
         case '!igstalk':
             if (args.length === 1)  return client.reply(from, 'Kirim perintah *!igStalk @username*\nConntoh *!igStalk @duar_amjay*', id)
@@ -306,52 +286,6 @@ module.exports = msgHandler = async (client, message) => {
             const caps = `➸ *Nama* : ${fullname}\n➸ *Username* : ${username}\n➸ *Jumlah Followers* : ${follower}\n➸ *Jumlah Following* : ${following}\n➸ *Biodata* : ${bio}`
             await client.sendFileFromUrl(from, profile_pic, 'Profile.jpg', caps, id)
             break
-        case '!infogempa':
-            const bmkg = await get.get(`https://mhankbarbar.moe/api/infogempa?apiKey=${apiKey}`).json()
-            const { potensi, koordinat, lokasi, kedalaman, magnitude, waktu, map } = bmkg
-            const hasil = `*${waktu}*\n📍 *Lokasi* : *${lokasi}*\n〽️ *Kedalaman* : *${kedalaman}*\n💢 *Magnitude* : *${magnitude}*\n🔘 *Potensi* : *${potensi}*\n📍 *Koordinat* : *${koordinat}*`
-            client.sendFileFromUrl(from, map, 'shakemap.jpg', hasil, id)
-            break
-        case '!nh':
-            //if (isGroupMsg) return client.reply(from, 'Sorry this command for private chat only!', id)
-            if (args.length === 2) {
-                const nuklir = body.split(' ')[1]
-                client.reply(from, mess.wait, id)
-                const cek = await nhentai.exists(nuklir)
-                if (cek === true)  {
-                    try {
-                        const api = new API()
-                        const pic = await api.getBook(nuklir).then(book => {
-                            return api.getImageURL(book.cover)
-                        })
-                        const dojin = await nhentai.getDoujin(nuklir)
-                        const { title, details, link } = dojin
-                        const { parodies, tags, artists, groups, languages, categories } = await details
-                        var teks = `*Title* : ${title}\n\n*Parodies* : ${parodies}\n\n*Tags* : ${tags.join(', ')}\n\n*Artists* : ${artists.join(', ')}\n\n*Groups* : ${groups.join(', ')}\n\n*Languages* : ${languages.join(', ')}\n\n*Categories* : ${categories}\n\n*Link* : ${link}`
-                        //exec('nhentai --id=' + nuklir + ` -P mantap.pdf -o ./hentong/${nuklir}.pdf --format `+ `${nuklir}.pdf`, (error, stdout, stderr) => {
-                        client.sendFileFromUrl(from, pic, 'hentod.jpg', teks, id)
-                            //client.sendFile(from, `./hentong/${nuklir}.pdf/${nuklir}.pdf.pdf`, then(() => `${title}.pdf`, '', id)).catch(() => 
-                            //client.sendFile(from, `./hentong/${nuklir}.pdf/${nuklir}.pdf.pdf`, `${title}.pdf`, '', id))
-                            /*if (error) {
-                                console.log('error : '+ error.message)
-                                return
-                            }
-                            if (stderr) {
-                                console.log('stderr : '+ stderr)
-                                return
-                            }
-                            console.log('stdout : '+ stdout)*/
-                            //})
-                    } catch (err) {
-                        client.reply(from, '[❗] Terjadi kesalahan, mungkin kode nuklir salah', id)
-                    }
-                } else {
-                    client.reply(from, '[❗] Kode nuClear Salah!')
-                }
-            } else {
-                client.reply(from, '[ WRONG ] Kirim perintah *!nh [nuClear]* untuk contoh kirim perintah *!readme*')
-            }
-        	break
         case '!brainly':
             if (args.length >= 2){
                 const BrainlySearch = require('./lib/brainly')
@@ -373,47 +307,6 @@ module.exports = msgHandler = async (client, message) => {
                 })
             } else {
                 client.reply(from, 'Usage :\n!brainly [pertanyaan] [.jumlah]\n\nEx : \n!brainly NKRI .2', id)
-            }
-            break
-        case '!wait':
-            if (isMedia && type === 'image' || quotedMsg && quotedMsg.type === 'image') {
-                if (isMedia) {
-                    var mediaData = await decryptMedia(message, uaOverride)
-                } else {
-                    var mediaData = await decryptMedia(quotedMsg, uaOverride)
-                }
-                const fetch = require('node-fetch')
-                const imgBS4 = `data:${mimetype};base64,${mediaData.toString('base64')}`
-                client.reply(from, 'Searching....', id)
-                fetch('https://trace.moe/api/search', {
-                    method: 'POST',
-                    body: JSON.stringify({ image: imgBS4 }),
-                    headers: { "Content-Type": "application/json" }
-                })
-                .then(respon => respon.json())
-                .then(resolt => {
-                	if (resolt.docs && resolt.docs.length <= 0) {
-                		client.reply(from, 'Maaf, saya tidak tau ini anime apa', id)
-                	}
-                    const { is_adult, title, title_chinese, title_romaji, title_english, episode, similarity, filename, at, tokenthumb, anilist_id } = resolt.docs[0]
-                    teks = ''
-                    if (similarity < 0.92) {
-                    	teks = '*Saya memiliki keyakinan rendah dalam hal ini* :\n\n'
-                    }
-                    teks += `➸ *Title Japanese* : ${title}\n➸ *Title chinese* : ${title_chinese}\n➸ *Title Romaji* : ${title_romaji}\n➸ *Title English* : ${title_english}\n`
-                    teks += `➸ *Ecchi* : ${is_adult}\n`
-                    teks += `➸ *Eps* : ${episode.toString()}\n`
-                    teks += `➸ *Kesamaan* : ${(similarity * 100).toFixed(1)}%\n`
-                    var video = `https://media.trace.moe/video/${anilist_id}/${encodeURIComponent(filename)}?t=${at}&token=${tokenthumb}`;
-                    client.sendFileFromUrl(from, video, 'nimek.mp4', teks, id).catch(() => {
-                        client.reply(from, teks, id)
-                    })
-                })
-                .catch(() => {
-                    client.reply(from, 'Error !', id)
-                })
-            } else {
-                client.sendFile(from, './media/img/tutod.jpg', 'Tutor.jpg', 'Neh contoh mhank!', id)
             }
             break
         case '!quotemaker':
