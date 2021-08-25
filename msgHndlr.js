@@ -189,7 +189,7 @@ module.exports = msgHandler = async (client, message) => {
             if (!isLinks) return client.reply(from, mess.error.Iv, id)
             try {
                 client.reply(from, mess.wait, id)
-                const resp = await get.get(`https://api.zeks.xyz/api/ytmp3?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&url=${args[1]}`).json()
+                const resp = await get.get(`https://api.zeks.me/api/ytmp3/2?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&url=${args[1]}`).json()
                 const respp = await resp.result
                 if (resp.error) {
                     client.reply(from, resp.error, id)
