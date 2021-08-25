@@ -201,6 +201,7 @@ module.exports = msgHandler = async (client, message) => {
                     //await client.sendAudio(from, result, id)
                 }
             } catch (err) {
+                console.log(err)
                 client.reply(from, mess.error.Yt3, id)
             }
             break
