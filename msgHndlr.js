@@ -191,7 +191,7 @@ module.exports = msgHandler = async (client, message) => {
                 client.reply(from, mess.wait, id)
                 const ytmp3download = await get.get(`https://api.zeks.me/api/ytmp3/2?apikey=W59BFCtwydp2TPJJv0D0UIICzwS&url=${args[1]}`).json()
                 console.log(ytmp3download.result)
-                if (Number(ytmp3download.result.size.split(' MB')[0]) >= 100.00) return client.reply(from, 'Maaf durasi video sudah melebihi batas maksimal!', id);
+                if (Number(ytmp3download.result.size.split(' MB')[0]) >= 40.00) return client.reply(from, 'Maaf durasi video sudah melebihi batas maksimal!', id);
                 client.sendFileFromUrl(from, ytmp3download.result.thumb, 'thumb.jpg', `➸ *Title* : ${ytmp3download.result.title}\n➸ *Filesize* : ${ytmp3download.result.size}\n\nSilahkan tunggu sebentar proses pengiriman file membutuhkan waktu beberapa menit.`, id);
                 await client.sendFileFromUrl(from, ytmp3download.result.link, `${ytmp3download.result.title}.mp3`, '', id).catch(() => client.reply(from, mess.error.Yt3, id));
             } catch (err) {
