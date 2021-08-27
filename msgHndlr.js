@@ -609,6 +609,10 @@ module.exports = msgHandler = async (client, message) => {
                 client.reply(from, mess.wait, id)
                 await client.sendFileFromUrl(from, sswebb, 'screenshot.jpg', ``, id)
             break
+            case '!puisi':
+                const urlpuisi = "https://api.vhtear.com/puisi_image&apikey=c22e9e11d9a248fc8844a42b6c9c8ba2"
+                client.sendFileFromUrl(from, urlpuisi, 'puisi.jpg', null, id)
+                break 
 	}
         
     } catch (err) {
