@@ -603,6 +603,12 @@ module.exports = msgHandler = async (client, message) => {
                     client.reply(from, `[❗] Perintah ini masih dalam tahap BETA. Beberapa bug mungkin masih terjadi.\n\nError logs:\n${e.stack}`, id)
                 }
             break
+            case '!ssweb':
+                if (args.length === 1)  return client.reply(from, '[❗] Mohon berikan suatu text\n\n*Contoh* : !ssweb google.com', id)
+                const sswebb = `https://api.vhtear.com/ssweb?link=${args[1]}&type=phone&apikey=c22e9e11d9a248fc8844a42b6c9c8ba2`
+                client.reply(from, mess.wait, id)
+                await client.sendFileFromUrl(from, sswebb, 'screenshot.jpg', ``, id)
+            break
 	}
         
     } catch (err) {
