@@ -273,9 +273,9 @@ module.exports = msgHandler = async (client, message) => {
             if (args.length === 1)  return client.reply(from, 'Kirim perintah *!igStalk @username*\nConntoh *!igStalk @duar_amjay*', id)
             const stalk = await get.get(`https://api.vhtear.com/igprofile?query=${args[1]}&apikey=c22e9e11d9a248fc8844a42b6c9c8ba2`).json()
             if (stalk.error) return client.reply(from, stalk.error, id)
-            const { biography, follower, follow, full_name, username, picture } = stalk
-            const caps = `➸ *Nama* : ${full_name}\n➸ *Username* : ${username}\n➸ *Jumlah Followers* : ${follower}\n➸ *Jumlah Following* : ${follow}\n➸ *Biodata* : ${biography}`
-            await client.sendFileFromUrl(from, picture, 'Profile.jpg', caps, id)
+            const account = stalk.result
+            const caps = `➸ *Nama* : ${account.full_name}\n➸ *Username* : ${account.username}\n➸ *Jumlah Followers* : ${account.follower}\n➸ *Jumlah Following* : ${account.follow}\n➸ *Biodata* : ${account.biography}`
+            await client.sendFileFromUrl(from, account.picture, 'Profile.jpg', caps, id)
             break
         case '!brainly':
             if (args.length >= 2){
