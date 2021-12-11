@@ -513,9 +513,6 @@ module.exports = msgHandler = async (client, message) => {
             const datatime = await apishorturl.created_at
             client.reply(from, `*Hasil shorturl dari website:*\n${longurlnya}\n\n❒ Result: *${hasilshorturl}*\n❒ Date: ${datatime.date}\n❒ Timezone: ${datatime.timezone}`, id)
             break
-        /*case '!sendto':
-            client.sendFile(from, './msgHndlr.js', 'msgHndlr.js')
-            break*/
         case '!url2img':
             const webygdicari = body.slice(9)
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!url2img [web]*\nContoh *!url2img https://media.discordapp.net/attachments/459002735896035349/864377208607604746/b2a2d3cf-a2d1-46f4-97a9-b2a76b8821bd.png*', id)
@@ -531,9 +528,6 @@ module.exports = msgHandler = async (client, message) => {
         case '!list':    
         case '!help':
             client.sendText(from, help)
-            break
-        case '!readme':
-            client.reply(from, readme, id)
             break
         case '!snk':
             client.reply(from, snk, id)
