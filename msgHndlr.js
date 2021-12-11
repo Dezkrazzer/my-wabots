@@ -21,6 +21,8 @@ const welkom = JSON.parse(fs.readFileSync('./lib/welcome.json'))
 const snek = require("snekfetch")
 const weather = require('weather-js')
 const { RemoveBgResult, removeBackgroundFromImageBase64, removeBackgroundFromImageFile } = require('remove.bg')
+const TikTokScraper = require("tiktok-scraper");
+
 
 moment.tz.setDefault('Asia/Jakarta').locale('id')
 
@@ -77,6 +79,10 @@ module.exports = msgHandler = async (client, message) => {
         //if (!isGroupMsg && !command.startsWith('!')) console.log('\x1b[1;33m~\x1b[1;37m>', '[\x1b[1;31mMSG\x1b[1;37m]', time, color(body), 'from', color(pushname))
         //if (isGroupMsg && !command.startsWith('!')) console.log('\x1b[1;33m~\x1b[1;37m>', '[\x1b[1;31mMSG\x1b[1;37m]', time, color(body), 'from', color(pushname), 'in', color(formattedTitle))
         if (isBlocked) return
+
+    client.onMessage(message => {
+        console.log(message.body);
+    })
         //if (!isOwner) return
         switch(command) {
         case '!sticker':
