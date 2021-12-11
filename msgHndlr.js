@@ -539,7 +539,9 @@ module.exports = msgHandler = async (client, message) => {
             client.reply(from, snk, id)
             break
         case '!ping':
-            client.sendText(message.from, `Pong!`)
+            const start = Date.now()
+            const latency = Date.now() - start;
+            client.sendText(message.from, `🏓 | Pong! My latency is *${latency}*ms`)
             break
         case '!mock':
             if (args.length === 1)  return client.reply(from, '[❗] Mohon berikan suatu text\n\n*Contoh* : Kamu seorang yang cerdas', id)   
